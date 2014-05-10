@@ -1,4 +1,5 @@
 <?php
+#require_once 'Michelf/MarkdownExtra.inc.php';
 /**
  * MarkdownExtraParser - A quick MediaWiki hook for using a Markdown parser
  *
@@ -65,6 +66,10 @@ class MarkdownExtraParser {
 
 	public static function parseAsMarkdown( &$parser, &$text ) {
 		$text = Markdown( $text );
+$pattern = "/<a href=\"(.+?)\"( title=\"(.+?)\")?".">(.+?)<\/a>/i";
+	$replacement = '[$1 $4]';
+ 
+	$text = preg_replace($pattern, $replacement, $text);
 		return true;
 	}
 
